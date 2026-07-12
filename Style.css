@@ -1,0 +1,392 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+body {
+
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+
+    background:#020617;
+    color:white;
+
+}
+
+
+
+/* Hintergrund */
+
+.background {
+
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+
+}
+
+
+.grid {
+
+    position:absolute;
+    inset:-50%;
+
+    background-image:
+    linear-gradient(#00f7ff22 1px, transparent 1px),
+    linear-gradient(90deg,#00f7ff22 1px,transparent 1px);
+
+    background-size:50px 50px;
+
+    transform:perspective(500px) rotateX(60deg);
+
+    animation:gridMove 8s linear infinite;
+
+}
+
+
+@keyframes gridMove {
+
+    from{
+        transform:
+        perspective(500px)
+        rotateX(60deg)
+        translateY(0);
+    }
+
+    to{
+        transform:
+        perspective(500px)
+        rotateX(60deg)
+        translateY(50px);
+    }
+
+}
+
+
+
+/* HUD */
+
+.hud {
+
+    position:absolute;
+
+    top:20px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:90%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    z-index:10;
+
+}
+
+
+
+.logo {
+
+    font-size:35px;
+    font-weight:900;
+
+    color:#00f7ff;
+
+    letter-spacing:5px;
+
+    text-shadow:
+    0 0 10px #00f7ff,
+    0 0 30px #00f7ff;
+
+}
+
+
+
+.stats {
+
+    display:flex;
+    gap:20px;
+
+}
+
+
+
+.stats div {
+
+    background:#ffffff10;
+
+    border:1px solid #00f7ff55;
+
+    padding:12px 20px;
+
+    border-radius:15px;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 0 20px #00f7ff33;
+
+    text-align:center;
+
+}
+
+
+
+.stats span {
+
+    display:block;
+
+    color:#00ff9d;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+}
+
+
+
+/* Spielfeld */
+
+#game {
+
+    position:absolute;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+}
+
+
+
+/* Spieler */
+
+#player {
+
+    position:absolute;
+
+    width:45px;
+    height:45px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+}
+
+
+
+.core {
+
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+        circle,
+        white,
+        #00ffff 30%,
+        #0066ff 70%
+    );
+
+
+    box-shadow:
+
+    0 0 20px #00ffff,
+    0 0 60px #00ffff,
+    0 0 100px #0066ff;
+
+
+    animation:pulse 1s infinite alternate;
+
+}
+
+
+
+@keyframes pulse {
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.25);
+    }
+
+}
+
+
+
+/* Gegner */
+
+.enemy {
+
+    position:absolute;
+
+    width:35px;
+    height:35px;
+
+
+    border-radius:50%;
+
+
+    background:
+
+    radial-gradient(
+        circle,
+        #fff,
+        #ff0055 40%,
+        #700020
+    );
+
+
+    box-shadow:
+
+    0 0 20px #ff0055,
+    0 0 50px #ff0055;
+
+
+}
+
+
+
+/* Start Bildschirm */
+
+#startScreen {
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+
+    width:500px;
+
+    padding:50px;
+
+
+    text-align:center;
+
+
+    background:#ffffff10;
+
+    border:
+
+    1px solid #00ffff55;
+
+
+    border-radius:30px;
+
+
+    backdrop-filter:blur(20px);
+
+
+    box-shadow:
+
+    0 0 40px #00ffff33;
+
+
+}
+
+
+
+#startScreen h1 {
+
+    font-size:50px;
+
+    color:#00ffff;
+
+    text-shadow:
+
+    0 0 20px #00ffff;
+
+}
+
+
+
+#startScreen p {
+
+    margin:25px 0;
+
+    font-size:18px;
+
+    color:#ddd;
+
+}
+
+
+
+button {
+
+    padding:18px 45px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#00ffff;
+
+    color:#001;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+
+    box-shadow:
+
+    0 0 20px #00ffff;
+
+
+    transition:.3s;
+
+}
+
+
+
+button:hover {
+
+    transform:scale(1.1);
+
+    box-shadow:
+
+    0 0 50px #00ffff;
+
+}
+
+
+
+/* Steuerung */
+
+.controls {
+
+    position:absolute;
+
+    bottom:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+
+    color:#aaa;
+
+    letter-spacing:2px;
+
+}
