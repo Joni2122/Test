@@ -2,7 +2,10 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:
+    "Orbitron",
+    "Segoe UI",
+    sans-serif;
 }
 
 
@@ -10,383 +13,844 @@ body {
 
     width:100vw;
     height:100vh;
+
     overflow:hidden;
 
-    background:#020617;
+    background:#000;
+
     color:white;
 
 }
 
 
 
-/* Hintergrund */
 
-.background {
+#gameContainer {
 
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-
-}
-
-
-.grid {
-
-    position:absolute;
-    inset:-50%;
-
-    background-image:
-    linear-gradient(#00f7ff22 1px, transparent 1px),
-    linear-gradient(90deg,#00f7ff22 1px,transparent 1px);
-
-    background-size:50px 50px;
-
-    transform:perspective(500px) rotateX(60deg);
-
-    animation:gridMove 8s linear infinite;
-
-}
-
-
-@keyframes gridMove {
-
-    from{
-        transform:
-        perspective(500px)
-        rotateX(60deg)
-        translateY(0);
-    }
-
-    to{
-        transform:
-        perspective(500px)
-        rotateX(60deg)
-        translateY(50px);
-    }
-
-}
-
-
-
-/* HUD */
-
-.hud {
-
-    position:absolute;
-
-    top:20px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:90%;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    z-index:10;
-
-}
-
-
-
-.logo {
-
-    font-size:35px;
-    font-weight:900;
-
-    color:#00f7ff;
-
-    letter-spacing:5px;
-
-    text-shadow:
-    0 0 10px #00f7ff,
-    0 0 30px #00f7ff;
-
-}
-
-
-
-.stats {
-
-    display:flex;
-    gap:20px;
-
-}
-
-
-
-.stats div {
-
-    background:#ffffff10;
-
-    border:1px solid #00f7ff55;
-
-    padding:12px 20px;
-
-    border-radius:15px;
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-    0 0 20px #00f7ff33;
-
-    text-align:center;
-
-}
-
-
-
-.stats span {
-
-    display:block;
-
-    color:#00ff9d;
-
-    font-size:25px;
-
-    font-weight:bold;
-
-}
-
-
-
-/* Spielfeld */
-
-#game {
-
-    position:absolute;
-
-    width:100vw;
-    height:100vh;
-
-    overflow:hidden;
-
-}
-
-
-
-/* Spieler */
-
-#player {
-
-    position:absolute;
-
-    width:45px;
-    height:45px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-}
-
-
-
-.core {
+    position:relative;
 
     width:100%;
     height:100%;
 
-    border-radius:50%;
+    overflow:hidden;
 
     background:
-
     radial-gradient(
-        circle,
-        white,
-        #00ffff 30%,
-        #0066ff 70%
+        circle at center,
+        #102040,
+        #02030a 70%
     );
 
-
-    box-shadow:
-
-    0 0 20px #00ffff,
-    0 0 60px #00ffff,
-    0 0 100px #0066ff;
-
-
-    animation:pulse 1s infinite alternate;
-
 }
 
 
 
-@keyframes pulse {
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.25);
-    }
-
-}
 
 
-
-/* Gegner */
-
-.enemy {
+#gameCanvas {
 
     position:absolute;
 
-    width:35px;
-    height:35px;
+    width:100%;
+    height:100%;
+
+    display:block;
+
+}
 
 
-    border-radius:50%;
 
+
+
+
+/* =========================
+   LOADING SCREEN
+========================= */
+
+
+#loadingScreen {
+
+    position:absolute;
+
+    inset:0;
 
     background:
-
     radial-gradient(
         circle,
-        #fff,
-        #ff0055 40%,
-        #700020
+        #07172f,
+        #000
     );
 
 
-    box-shadow:
+    display:flex;
 
-    0 0 20px #ff0055,
-    0 0 50px #ff0055;
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    z-index:100;
 
 
 }
 
 
 
-/* Start Bildschirm */
+.loadingLogo {
 
-#startScreen {
 
-    position:absolute;
+    font-size:100px;
 
-    top:50%;
-    left:50%;
+    font-weight:900;
 
-    transform:translate(-50%,-50%);
+    letter-spacing:25px;
+
+
+    color:#00eaff;
+
+
+    text-shadow:
+
+    0 0 20px #00eaff,
+    0 0 80px #008cff;
+
+
+    animation:
+    logoPulse 2s infinite alternate;
+
+
+}
+
+
+
+.loadingSubtitle {
+
+
+    font-size:30px;
+
+    letter-spacing:15px;
+
+    color:#fff;
+
+    margin-bottom:50px;
+
+
+}
+
+
+
+.loadingBar {
 
 
     width:500px;
 
-    padding:50px;
+    height:8px;
+
+    background:#111827;
+
+    border:1px solid #00eaff;
+
+
+}
+
+
+
+#loadingProgress {
+
+
+    width:0%;
+
+    height:100%;
+
+
+    background:#00eaff;
+
+
+    box-shadow:
+
+    0 0 30px #00eaff;
+
+
+}
+
+
+
+
+
+@keyframes logoPulse {
+
+
+    from {
+
+        filter:
+        brightness(1);
+
+    }
+
+
+    to {
+
+        filter:
+        brightness(2);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   HUD
+========================= */
+
+
+#hud {
+
+
+    position:absolute;
+
+    inset:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    pointer-events:none;
+
+    z-index:10;
+
+
+}
+
+
+
+
+
+.playerPanel,
+.missionPanel,
+.statsPanel {
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(0,255,255,.12),
+        rgba(0,0,0,.4)
+    );
+
+
+    border:
+
+    1px solid rgba(0,238,255,.5);
+
+
+    backdrop-filter:blur(15px);
+
+
+    box-shadow:
+
+    0 0 30px rgba(0,238,255,.15);
+
+
+    padding:25px;
+
+
+}
+
+
+
+
+
+.playerPanel {
+
+    width:300px;
+
+}
+
+
+
+
+
+.playerName {
+
+
+    font-size:22px;
+
+    color:#00ffff;
+
+    margin-bottom:20px;
+
+    letter-spacing:3px;
+
+
+}
+
+
+
+
+
+
+
+.healthBar,
+.energyBar {
+
+
+    height:15px;
+
+    width:250px;
+
+
+    background:#111;
+
+
+    margin-top:8px;
+
+
+    border:
+
+    1px solid #555;
+
+
+}
+
+
+
+
+
+#health {
+
+
+    width:100%;
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #ff003c,
+        #ff9900
+    );
+
+
+    box-shadow:
+
+    0 0 20px red;
+
+
+}
+
+
+
+
+#energy {
+
+
+    width:100%;
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #00ffff,
+        #0066ff
+    );
+
+
+    box-shadow:
+
+    0 0 20px cyan;
+
+
+}
+
+
+
+
+
+
+
+.missionPanel {
 
 
     text-align:center;
 
-
-    background:#ffffff10;
-
-    border:
-
-    1px solid #00ffff55;
-
-
-    border-radius:30px;
-
-
-    backdrop-filter:blur(20px);
-
-
-    box-shadow:
-
-    0 0 40px #00ffff33;
+    width:300px;
 
 
 }
 
 
 
-#startScreen h1 {
+.missionPanel h2 {
 
-    font-size:50px;
 
     color:#00ffff;
 
-    text-shadow:
+    letter-spacing:5px;
 
-    0 0 20px #00ffff;
 
 }
 
 
 
-#startScreen p {
+#missionText {
 
-    margin:25px 0;
+
+    margin:20px 0;
 
     font-size:18px;
 
-    color:#ddd;
 
 }
 
 
 
-button {
-
-    padding:18px 45px;
-
-    border:none;
-
-    border-radius:50px;
-
-    background:#00ffff;
-
-    color:#001;
-
-    font-size:20px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-
-    box-shadow:
-
-    0 0 20px #00ffff;
-
-
-    transition:.3s;
-
-}
 
 
 
-button:hover {
 
-    transform:scale(1.1);
-
-    box-shadow:
-
-    0 0 50px #00ffff;
-
-}
-
-
-
-/* Steuerung */
-
-.controls {
-
-    position:absolute;
-
-    bottom:20px;
-
-    left:50%;
-
-    transform:translateX(-50%);
+.coordinates {
 
 
     color:#aaa;
 
-    letter-spacing:2px;
+    line-height:25px;
+
+}
+
+
+
+
+
+
+
+
+.statsPanel {
+
+
+    display:flex;
+
+    gap:30px;
+
+    align-items:center;
+
+
+}
+
+
+
+
+
+.statsPanel div {
+
+
+    text-align:center;
+
+    color:#aaa;
+
+}
+
+
+
+.statsPanel span {
+
+
+    display:block;
+
+    color:white;
+
+    font-size:30px;
+
+    text-shadow:
+
+    0 0 15px cyan;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   CROSSHAIR
+========================= */
+
+
+#crosshair {
+
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+
+    transform:translate(-50%,-50%);
+
+
+}
+
+
+
+#crosshair span {
+
+
+    position:absolute;
+
+    background:#00ffff;
+
+
+}
+
+
+
+#crosshair span:nth-child(1){
+
+    width:30px;
+    height:2px;
+    right:20px;
+
+}
+
+
+#crosshair span:nth-child(2){
+
+    width:30px;
+    height:2px;
+    left:20px;
+
+}
+
+
+
+#crosshair span:nth-child(3){
+
+    width:2px;
+    height:30px;
+    bottom:20px;
+
+}
+
+
+#crosshair span:nth-child(4){
+
+    width:2px;
+    height:30px;
+    top:20px;
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   MAIN MENU
+========================= */
+
+
+#menu {
+
+
+    position:absolute;
+
+    inset:0;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:
+
+    linear-gradient(
+        rgba(0,0,0,.4),
+        rgba(0,0,0,.8)
+    );
+
+
+}
+
+
+
+
+
+.gameLogo {
+
+
+    text-align:center;
+
+    margin-bottom:80px;
+
+
+}
+
+
+
+.gameLogo h1 {
+
+
+    font-size:120px;
+
+    letter-spacing:30px;
+
+
+    color:#00ffff;
+
+
+    text-shadow:
+
+    0 0 20px cyan,
+
+    0 0 80px cyan;
+
+
+}
+
+
+
+.gameLogo h2 {
+
+
+    font-size:40px;
+
+    letter-spacing:20px;
+
+
+}
+
+
+
+
+
+.menuButtons {
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+
+}
+
+
+
+
+
+.menuButtons button,
+#pauseMenu button {
+
+
+    width:350px;
+
+    padding:20px;
+
+
+    background:
+
+    rgba(0,255,255,.1);
+
+
+    border:
+
+    2px solid #00ffff;
+
+
+    color:white;
+
+
+    font-size:22px;
+
+
+    letter-spacing:5px;
+
+
+    cursor:pointer;
+
+
+    transition:.4s;
+
+
+}
+
+
+
+
+
+.menuButtons button:hover,
+#pauseMenu button:hover {
+
+
+    background:#00ffff;
+
+
+    color:black;
+
+
+    transform:
+    scale(1.08);
+
+
+    box-shadow:
+
+    0 0 50px cyan;
+
+
+}
+
+
+
+
+
+
+
+.version {
+
+
+    position:absolute;
+
+    bottom:30px;
+
+    color:#777;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   EFFECTS
+========================= */
+
+
+#damageOverlay {
+
+
+    position:absolute;
+
+    inset:0;
+
+    background:red;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+
+
+
+#vignette {
+
+
+    position:absolute;
+
+    inset:0;
+
+
+    background:
+
+    radial-gradient(
+        transparent 40%,
+        black 100%
+    );
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+#notification {
+
+
+    position:absolute;
+
+    bottom:80px;
+
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+    padding:15px 40px;
+
+
+    border:
+
+    1px solid cyan;
+
+
+    background:#001b22;
+
+
+    box-shadow:
+
+    0 0 30px cyan;
+
+
+}
+
+
+
+#pauseMenu {
+
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+
+    background:
+
+    rgba(0,0,0,.8);
+
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
 
 }
