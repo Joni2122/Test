@@ -1,269 +1,319 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Survivor</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXUS: ZERO HORIZON</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<div class="background">
-    <div class="grid"></div>
+
+<!-- Loading Screen -->
+
+<div id="loadingScreen">
+
+    <div class="loadingLogo">
+        NEXUS
+    </div>
+
+    <div class="loadingSubtitle">
+        ZERO HORIZON
+    </div>
+
+
+    <div class="loadingBar">
+
+        <div id="loadingProgress"></div>
+
+    </div>
+
+
+    <p>
+        INITIALIZING SYSTEM...
+    </p>
+
+
 </div>
 
-<div class="hud">
 
-    <div class="logo">
-        NEON SURVIVOR
-    </div>
 
-    <div class="stats">
-        <div>
-            SCORE
-            <span id="score">0</span>
+
+<!-- Main Game Container -->
+
+<div id="gameContainer">
+
+
+    <!-- 3D Canvas -->
+
+    <canvas id="gameCanvas"></canvas>
+
+
+
+
+    <!-- Top HUD -->
+
+    <div id="hud">
+
+
+        <div class="playerPanel">
+
+
+            <div class="playerName">
+                PLAYER // UNKNOWN
+            </div>
+
+
+            <div class="healthContainer">
+
+                <div class="healthLabel">
+                    HEALTH
+                </div>
+
+
+                <div class="healthBar">
+
+                    <div id="health"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="energyContainer">
+
+                <div class="energyLabel">
+                    ENERGY
+                </div>
+
+
+                <div class="energyBar">
+
+                    <div id="energy"></div>
+
+                </div>
+
+            </div>
+
+
         </div>
 
-        <div>
-            ENERGY
-            <span id="energy">100</span>%
+
+
+
+
+        <div class="missionPanel">
+
+
+            <h2>
+                MISSION
+            </h2>
+
+
+            <p id="missionText">
+                ENTER THE UNKNOWN
+            </p>
+
+
+            <div class="coordinates">
+
+                X: 0000<br>
+                Y: 0000<br>
+                Z: 0000
+
+            </div>
+
+
         </div>
 
-        <div>
-            LEVEL
-            <span id="level">1</span>
+
+
+
+
+        <div class="statsPanel">
+
+
+            <div>
+                SCORE
+                <span id="score">
+                    000000
+                </span>
+            </div>
+
+
+            <div>
+                LEVEL
+                <span id="level">
+                    01
+                </span>
+            </div>
+
+
+            <div>
+                CREDITS
+                <span id="credits">
+                    000
+                </span>
+            </div>
+
+
         </div>
-    </div>
-
-</div>
 
 
-<div id="game">
 
-    <div id="player">
-        <div class="core"></div>
     </div>
 
 
-    <div id="startScreen">
 
-        <h1>NEON SURVIVOR</h1>
 
-        <p>
-            Überlebe die Neon-Arena.
-            Sammle Energie.
-            Weiche den Drohnen aus.
-        </p>
 
-        <button id="startButton">
-            START MISSION
+
+    <!-- Center Crosshair -->
+
+    <div id="crosshair">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+
+
+
+    <!-- Interaction Notification -->
+
+
+    <div id="notification">
+
+        SYSTEM READY
+
+    </div>
+
+
+
+
+
+    <!-- Start Menu -->
+
+
+    <div id="menu">
+
+
+        <div class="gameLogo">
+
+            <h1>
+                NEXUS
+            </h1>
+
+            <h2>
+                ZERO HORIZON
+            </h2>
+
+        </div>
+
+
+
+
+        <div class="menuButtons">
+
+
+            <button id="startGame">
+                START MISSION
+            </button>
+
+
+            <button>
+                SETTINGS
+            </button>
+
+
+            <button>
+                CREDITS
+            </button>
+
+
+        </div>
+
+
+
+
+        <div class="version">
+
+            VERSION 1.0 // WEBGL EXPERIENCE
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Pause Menu -->
+
+
+    <div id="pauseMenu">
+
+
+        <h1>
+            SYSTEM PAUSED
+        </h1>
+
+
+        <button id="resume">
+            RESUME
         </button>
 
+
     </div>
 
 
+
+
+
+
+    <!-- Damage Overlay -->
+
+
+    <div id="damageOverlay"></div>
+
+
+
+
+
+    <!-- Vignette -->
+
+    <div id="vignette"></div>
+
+
+
 </div>
 
 
-<div class="controls">
-    WASD / Pfeiltasten zum Bewegen
-</div>
 
 
 
-<script>
 
-const player = document.getElementById("player");
-const game = document.getElementById("game");
 
-const scoreText = document.getElementById("score");
-const energyText = document.getElementById("energy");
-const levelText = document.getElementById("level");
+<!-- Game Scripts -->
 
-const startButton = document.getElementById("startButton");
-const startScreen = document.getElementById("startScreen");
-
-
-let playing = false;
-
-let x = 50;
-let y = 50;
-
-let score = 0;
-let energy = 100;
-let level = 1;
-
-
-let keys = {};
-
-
-
-document.addEventListener("keydown", e=>{
-    keys[e.key] = true;
-});
-
-
-document.addEventListener("keyup", e=>{
-    keys[e.key] = false;
-});
-
-
-
-function movePlayer(){
-
-    if(!playing) return;
-
-
-    let speed = 0.8;
-
-
-    if(keys["ArrowLeft"] || keys["a"])
-        x -= speed;
-
-
-    if(keys["ArrowRight"] || keys["d"])
-        x += speed;
-
-
-    if(keys["ArrowUp"] || keys["w"])
-        y -= speed;
-
-
-    if(keys["ArrowDown"] || keys["s"])
-        y += speed;
-
-
-
-    x=Math.max(3,Math.min(97,x));
-    y=Math.max(5,Math.min(95,y));
-
-
-    player.style.left=x+"%";
-    player.style.top=y+"%";
-
-
-    requestAnimationFrame(movePlayer);
-
-}
-
-
-
-
-function createEnemy(){
-
-    if(!playing)return;
-
-
-    let enemy=document.createElement("div");
-
-    enemy.className="enemy";
-
-
-    enemy.style.left=Math.random()*95+"%";
-    enemy.style.top="-50px";
-
-
-    game.appendChild(enemy);
-
-
-
-    let fall=setInterval(()=>{
-
-        if(!playing){
-            clearInterval(fall);
-            return;
-        }
-
-
-        let top=parseFloat(enemy.style.top);
-
-        enemy.style.top=top+0.7+"px";
-
-
-        let p=player.getBoundingClientRect();
-        let e=enemy.getBoundingClientRect();
-
-
-
-        if(
-            p.left<e.right &&
-            p.right>e.left &&
-            p.top<e.bottom &&
-            p.bottom>e.top
-        ){
-
-            energy-=20;
-            energyText.textContent=energy;
-
-
-            enemy.remove();
-            clearInterval(fall);
-
-
-            if(energy<=0)
-                gameOver();
-
-        }
-
-
-
-        if(top>window.innerHeight){
-            score++;
-            scoreText.textContent=score;
-
-
-            if(score%10===0){
-                level++;
-                levelText.textContent=level;
-            }
-
-
-            enemy.remove();
-            clearInterval(fall);
-        }
-
-
-
-    },10);
-
-}
-
-
-
-function gameOver(){
-
-    playing=false;
-
-    alert(
-        "MISSION FAILED\nScore: "+score
-    );
-
-    location.reload();
-
-}
-
-
-
-
-startButton.onclick=()=>{
-
-    playing=true;
-
-    startScreen.style.display="none";
-
-
-    movePlayer();
-
-
-    setInterval(createEnemy,700);
-
-};
-
-
-
-</script>
+<script src="script.js"></script>
 
 
 </body>
+
 </html>
