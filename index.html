@@ -1,319 +1,36 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NEXUS: ZERO HORIZON</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt X</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
 
+    <div class="background"></div>
 
-<!-- Loading Screen -->
+    <header>
+        <h1>PROJECT X</h1>
+        <p>Willkommen.</p>
+    </header>
 
-<div id="loadingScreen">
-
-    <div class="loadingLogo">
-        NEXUS
-    </div>
-
-    <div class="loadingSubtitle">
-        ZERO HORIZON
-    </div>
-
-
-    <div class="loadingBar">
-
-        <div id="loadingProgress"></div>
-
-    </div>
-
-
-    <p>
-        INITIALIZING SYSTEM...
-    </p>
-
-
-</div>
-
-
-
-
-<!-- Main Game Container -->
-
-<div id="gameContainer">
-
-
-    <!-- 3D Canvas -->
-
-    <canvas id="gameCanvas"></canvas>
-
-
-
-
-    <!-- Top HUD -->
-
-    <div id="hud">
-
-
-        <div class="playerPanel">
-
-
-            <div class="playerName">
-                PLAYER // UNKNOWN
+    <main>
+        <section class="hero">
+            <div class="card">
+                <h2>Entdecken</h2>
+                <p>Etwas Außergewöhnliches wartet hier.</p>
+                <button>Start</button>
             </div>
-
-
-            <div class="healthContainer">
-
-                <div class="healthLabel">
-                    HEALTH
-                </div>
-
-
-                <div class="healthBar">
-
-                    <div id="health"></div>
-
-                </div>
-
-            </div>
-
-
-            <div class="energyContainer">
-
-                <div class="energyLabel">
-                    ENERGY
-                </div>
-
-
-                <div class="energyBar">
-
-                    <div id="energy"></div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <div class="missionPanel">
-
-
-            <h2>
-                MISSION
-            </h2>
-
-
-            <p id="missionText">
-                ENTER THE UNKNOWN
-            </p>
-
-
-            <div class="coordinates">
-
-                X: 0000<br>
-                Y: 0000<br>
-                Z: 0000
-
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <div class="statsPanel">
-
-
-            <div>
-                SCORE
-                <span id="score">
-                    000000
-                </span>
-            </div>
-
-
-            <div>
-                LEVEL
-                <span id="level">
-                    01
-                </span>
-            </div>
-
-
-            <div>
-                CREDITS
-                <span id="credits">
-                    000
-                </span>
-            </div>
-
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-
-    <!-- Center Crosshair -->
-
-    <div id="crosshair">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </div>
-
-
-
-
-
-    <!-- Interaction Notification -->
-
-
-    <div id="notification">
-
-        SYSTEM READY
-
-    </div>
-
-
-
-
-
-    <!-- Start Menu -->
-
-
-    <div id="menu">
-
-
-        <div class="gameLogo">
-
-            <h1>
-                NEXUS
-            </h1>
-
-            <h2>
-                ZERO HORIZON
-            </h2>
-
-        </div>
-
-
-
-
-        <div class="menuButtons">
-
-
-            <button id="startGame">
-                START MISSION
-            </button>
-
-
-            <button>
-                SETTINGS
-            </button>
-
-
-            <button>
-                CREDITS
-            </button>
-
-
-        </div>
-
-
-
-
-        <div class="version">
-
-            VERSION 1.0 // WEBGL EXPERIENCE
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-
-
-    <!-- Pause Menu -->
-
-
-    <div id="pauseMenu">
-
-
-        <h1>
-            SYSTEM PAUSED
-        </h1>
-
-
-        <button id="resume">
-            RESUME
-        </button>
-
-
-    </div>
-
-
-
-
-
-
-    <!-- Damage Overlay -->
-
-
-    <div id="damageOverlay"></div>
-
-
-
-
-
-    <!-- Vignette -->
-
-    <div id="vignette"></div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<!-- Game Scripts -->
-
-<script src="script.js"></script>
-
+        </section>
+
+        <section class="grid">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </section>
+    </main>
 
 </body>
-
 </html>
