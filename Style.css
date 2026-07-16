@@ -1,856 +1,116 @@
-* {
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:
-    "Orbitron",
-    "Segoe UI",
-    sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-
-body {
-
-    width:100vw;
-    height:100vh;
-
+body{
+    min-height:100vh;
+    background:#050510;
     overflow:hidden;
-
-    background:#000;
-
     color:white;
-
 }
 
+.background{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%,#00ffff55,transparent 30%),
+    radial-gradient(circle at 80% 30%,#ff00ff55,transparent 30%),
+    radial-gradient(circle at 50% 80%,#00ff8855,transparent 30%),
+    #050510;
+    animation:move 10s infinite alternate ease-in-out;
+}
 
+@keyframes move{
+    from{
+        transform:scale(1) rotate(0deg);
+    }
+    to{
+        transform:scale(1.2) rotate(8deg);
+    }
+}
 
-
-#gameContainer {
-
+header{
     position:relative;
-
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-
-    background:
-    radial-gradient(
-        circle at center,
-        #102040,
-        #02030a 70%
-    );
-
+    z-index:2;
+    text-align:center;
+    padding:60px 20px;
 }
 
-
-
-
-
-#gameCanvas {
-
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    display:block;
-
+header h1{
+    font-size:5rem;
+    letter-spacing:10px;
+    text-shadow:0 0 20px cyan;
 }
 
+header p{
+    margin-top:10px;
+    opacity:.8;
+}
 
-
-
-
-
-/* =========================
-   LOADING SCREEN
-========================= */
-
-
-#loadingScreen {
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    radial-gradient(
-        circle,
-        #07172f,
-        #000
-    );
-
-
+.hero{
+    position:relative;
+    z-index:2;
     display:flex;
-
-    flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
-
-
-    z-index:100;
-
-
+    margin-top:50px;
 }
 
-
-
-.loadingLogo {
-
-
-    font-size:100px;
-
-    font-weight:900;
-
-    letter-spacing:25px;
-
-
-    color:#00eaff;
-
-
-    text-shadow:
-
-    0 0 20px #00eaff,
-    0 0 80px #008cff;
-
-
-    animation:
-    logoPulse 2s infinite alternate;
-
-
-}
-
-
-
-.loadingSubtitle {
-
-
-    font-size:30px;
-
-    letter-spacing:15px;
-
-    color:#fff;
-
-    margin-bottom:50px;
-
-
-}
-
-
-
-.loadingBar {
-
-
-    width:500px;
-
-    height:8px;
-
-    background:#111827;
-
-    border:1px solid #00eaff;
-
-
-}
-
-
-
-#loadingProgress {
-
-
-    width:0%;
-
-    height:100%;
-
-
-    background:#00eaff;
-
-
-    box-shadow:
-
-    0 0 30px #00eaff;
-
-
-}
-
-
-
-
-
-@keyframes logoPulse {
-
-
-    from {
-
-        filter:
-        brightness(1);
-
-    }
-
-
-    to {
-
-        filter:
-        brightness(2);
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   HUD
-========================= */
-
-
-#hud {
-
-
-    position:absolute;
-
-    inset:30px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    pointer-events:none;
-
-    z-index:10;
-
-
-}
-
-
-
-
-
-.playerPanel,
-.missionPanel,
-.statsPanel {
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        rgba(0,255,255,.12),
-        rgba(0,0,0,.4)
-    );
-
-
-    border:
-
-    1px solid rgba(0,238,255,.5);
-
-
+.card{
+    width:400px;
+    padding:40px;
     backdrop-filter:blur(15px);
-
-
-    box-shadow:
-
-    0 0 30px rgba(0,238,255,.15);
-
-
-    padding:25px;
-
-
-}
-
-
-
-
-
-.playerPanel {
-
-    width:300px;
-
-}
-
-
-
-
-
-.playerName {
-
-
-    font-size:22px;
-
-    color:#00ffff;
-
-    margin-bottom:20px;
-
-    letter-spacing:3px;
-
-
-}
-
-
-
-
-
-
-
-.healthBar,
-.energyBar {
-
-
-    height:15px;
-
-    width:250px;
-
-
-    background:#111;
-
-
-    margin-top:8px;
-
-
-    border:
-
-    1px solid #555;
-
-
-}
-
-
-
-
-
-#health {
-
-
-    width:100%;
-
-    height:100%;
-
-
-    background:
-
-    linear-gradient(
-        90deg,
-        #ff003c,
-        #ff9900
-    );
-
-
-    box-shadow:
-
-    0 0 20px red;
-
-
-}
-
-
-
-
-#energy {
-
-
-    width:100%;
-
-    height:100%;
-
-
-    background:
-
-    linear-gradient(
-        90deg,
-        #00ffff,
-        #0066ff
-    );
-
-
-    box-shadow:
-
-    0 0 20px cyan;
-
-
-}
-
-
-
-
-
-
-
-.missionPanel {
-
-
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:25px;
     text-align:center;
-
-    width:300px;
-
-
+    box-shadow:0 0 40px rgba(0,255,255,.3);
 }
 
-
-
-.missionPanel h2 {
-
-
-    color:#00ffff;
-
-    letter-spacing:5px;
-
-
+.card h2{
+    margin-bottom:15px;
 }
 
-
-
-#missionText {
-
-
-    margin:20px 0;
-
-    font-size:18px;
-
-
-}
-
-
-
-
-
-
-
-.coordinates {
-
-
-    color:#aaa;
-
-    line-height:25px;
-
-}
-
-
-
-
-
-
-
-
-.statsPanel {
-
-
-    display:flex;
-
-    gap:30px;
-
-    align-items:center;
-
-
-}
-
-
-
-
-
-.statsPanel div {
-
-
-    text-align:center;
-
-    color:#aaa;
-
-}
-
-
-
-.statsPanel span {
-
-
-    display:block;
-
+.card button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(90deg,cyan,magenta);
     color:white;
-
-    font-size:30px;
-
-    text-shadow:
-
-    0 0 15px cyan;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   CROSSHAIR
-========================= */
-
-
-#crosshair {
-
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-
-    transform:translate(-50%,-50%);
-
-
-}
-
-
-
-#crosshair span {
-
-
-    position:absolute;
-
-    background:#00ffff;
-
-
-}
-
-
-
-#crosshair span:nth-child(1){
-
-    width:30px;
-    height:2px;
-    right:20px;
-
-}
-
-
-#crosshair span:nth-child(2){
-
-    width:30px;
-    height:2px;
-    left:20px;
-
-}
-
-
-
-#crosshair span:nth-child(3){
-
-    width:2px;
-    height:30px;
-    bottom:20px;
-
-}
-
-
-#crosshair span:nth-child(4){
-
-    width:2px;
-    height:30px;
-    top:20px;
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   MAIN MENU
-========================= */
-
-
-#menu {
-
-
-    position:absolute;
-
-    inset:0;
-
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-    background:
-
-    linear-gradient(
-        rgba(0,0,0,.4),
-        rgba(0,0,0,.8)
-    );
-
-
-}
-
-
-
-
-
-.gameLogo {
-
-
-    text-align:center;
-
-    margin-bottom:80px;
-
-
-}
-
-
-
-.gameLogo h1 {
-
-
-    font-size:120px;
-
-    letter-spacing:30px;
-
-
-    color:#00ffff;
-
-
-    text-shadow:
-
-    0 0 20px cyan,
-
-    0 0 80px cyan;
-
-
-}
-
-
-
-.gameLogo h2 {
-
-
-    font-size:40px;
-
-    letter-spacing:20px;
-
-
-}
-
-
-
-
-
-.menuButtons {
-
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:25px;
-
-
-}
-
-
-
-
-
-.menuButtons button,
-#pauseMenu button {
-
-
-    width:350px;
-
-    padding:20px;
-
-
-    background:
-
-    rgba(0,255,255,.1);
-
-
-    border:
-
-    2px solid #00ffff;
-
-
-    color:white;
-
-
-    font-size:22px;
-
-
-    letter-spacing:5px;
-
-
     cursor:pointer;
-
-
-    transition:.4s;
-
-
+    font-size:1rem;
+    transition:.3s;
 }
 
-
-
-
-
-.menuButtons button:hover,
-#pauseMenu button:hover {
-
-
-    background:#00ffff;
-
-
-    color:black;
-
-
-    transform:
-    scale(1.08);
-
-
-    box-shadow:
-
-    0 0 50px cyan;
-
-
+.card button:hover{
+    transform:scale(1.1);
 }
 
-
-
-
-
-
-
-.version {
-
-
-    position:absolute;
-
-    bottom:30px;
-
-    color:#777;
-
-}
-
-
-
-
-
-
-
-/* =========================
-   EFFECTS
-========================= */
-
-
-#damageOverlay {
-
-
-    position:absolute;
-
-    inset:0;
-
-    background:red;
-
-    opacity:0;
-
-    pointer-events:none;
-
-}
-
-
-
-
-
-#vignette {
-
-
-    position:absolute;
-
-    inset:0;
-
-
-    background:
-
-    radial-gradient(
-        transparent 40%,
-        black 100%
-    );
-
-
-    pointer-events:none;
-
-
-}
-
-
-
-#notification {
-
-
-    position:absolute;
-
-    bottom:80px;
-
-    left:50%;
-
-
-    transform:translateX(-50%);
-
-
-    padding:15px 40px;
-
-
-    border:
-
-    1px solid cyan;
-
-
-    background:#001b22;
-
-
-    box-shadow:
-
-    0 0 30px cyan;
-
-
-}
-
-
-
-#pauseMenu {
-
-
-    display:none;
-
-    position:absolute;
-
-    inset:0;
-
-
-    background:
-
-    rgba(0,0,0,.8);
-
-
+.grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(4,120px);
+    gap:20px;
     justify-content:center;
+    margin-top:70px;
+}
 
-    align-items:center;
+.box{
+    width:120px;
+    height:120px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.15);
+    transition:.4s;
+}
 
-    flex-direction:column;
-
-
+.box:hover{
+    transform:translateY(-15px) rotate(5deg);
+    box-shadow:0 0 25px cyan;
 }
